@@ -1,8 +1,4 @@
-# Title: AWS ConfigをD3.jsで可視化する
-# Subtitle: AWS ConfigをD3.jsで可視化!
-# Author: 加納 邦彦
-# Author(romaji): Kunihiko Kanou
-# Twitter: @k_kanou
+# AWS ConfigをD3.jsで可視化する
 
 # AWS Config とは
 
