@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8">
+  <title>D3.js x AWS Config</title>
+</head>
+<body>
+  <script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+  <script>
+    var width = 1000;
+    var height = 800;
+    var image_size = 100;
+    var text_size = image_size / 2;
+    var x = 0;
+    var y = 0;
+    var item_num = 0;
+
+    // SVG
+    var svg = d3.select("body").append("svg")
+                               .attr({ width: width,
+                                       height: height
+                                     });
+
+    // AWS Config
+    // 
+    // Example Configuration Snapshot from AWS Config
+    // http://docs.aws.amazon.com/ja_jp/config/latest/developerguide/example-s3-snapshot.html
+
+    d3.json("./json/aws_config.json", function(data){
+    
+      // AWS Icon
+      // 
+      // AWS Simple Icons for Architecture Diagrams
+      // https://aws.amazon.com/jp/architecture/icons/
+
+      var aws = svg.append("g")
+                aws.append("image")
+                   .attr({ "class": "image",
+                           "xlink:href":"images//AWS_Simple_Icons_EPS-SVG/General/General_AWScloud.svg",
+                         });
+
+          // accountId
+          x = x + image_size;
+          y = y + image_size / 2;
+
+          aws.append("text")
+             .text("accountId: " + data.configurationItems[0].accountId)
+             .attr({ "x": x,
+                     "y": y,
+                   });
+
+          aws.append("rect")
+             .attr({ "class": "rect",
+                     "width": width,
+                     "height": height,
+                   });
+
+      y = y + image_size / 2;
+      
+      // VPC Icon
+      item_num = item_num + 1;
+
+      var vpc = aws.append("g")
+                  // y = y + image_size / 2;
+                  vpc.append("image")
+                     .attr({ "class": "image",
+                             "xlink:href":"images//AWS_Simple_Icons_EPS-SVG/General/General_virtualprivatecloud.svg",
+                             "x": x,
+                             "y": y
+                           });
+
+      // AWS::EC2::Instance
+      for(var i=0; i<data.configurationItems.length; i++){
+        if (data.configurationItems[i].resourceType == "AWS::EC2::Instance"){
+
+          x = x + image_size;
+          y = y + image_size / 2;
+
+          vpc.append("text")
+             .text("vpcId: " + data.configurationItems[i].configuration.vpcId)
+             .attr({ "x": x,
+                     "y": y,
+                   })
+
+          vpc.append("rect")
+             .attr({ "class": "rect",
+                     "width": width - x * item_num,
+                     "height": height - y * item_num,
+                     "x": image_size * item_num,
+                     "y": image_size * item_num,
+                   });
+
+          // instanceId
+          // instanceType
+          // subnetId
+          // privateIpAddress
+          // publicIpAddress
+          // deviceName
+          // ebsOptimized
+          item_num = item_num + 1;
+
+          ec2_items = ["instanceId", "instanceType", "subnetId", "privateIpAddress", "publicIpAddress", "deviceName", "ebsOptimized"];
+
+          var ec2 = vpc.append("g")
+
+                    // EC2 Icon
+                    y = y + image_size / 2;
+
+                    ec2.append("image")
+                       .attr({ "class": "image",
+                               "xlink:href":"images//AWS_Simple_Icons_EPS-SVG/Compute/Compute_AmazonEC2_instance.svg",
+                               "x": x,
+                               "y": y
+                             });
+
+                    x = x + image_size;
+                    // y = y + image_size / 2;
+
+                    for(var j=0; j<ec2_items.length; j++){
+                      if (ec2_items[j] == "deviceName") {
+                        // deviceName
+                        var deviceName = [];
+                        for(var k=0; k<data.configurationItems[i].configuration.blockDeviceMappings.length; k++){
+                          deviceName.push(data.configurationItems[i].configuration.blockDeviceMappings[k].deviceName)
+                        }
+
+                        y = y + image_size / 2;
+                        ec2.append("text")
+                           .text("deviceName: " + deviceName.join(", "))
+                           .attr({ "x": x,
+                                   "y": y,
+                                 })
+                      } else {
+                        y = y + image_size / 2;
+                        ec2.append("text")
+                           .text(ec2_items[j] + ": " + data.configurationItems[i].configuration[ec2_items[j]])
+                           .attr({ "x": x,
+                                   "y": y,
+                                 })
+                      }
+
+                    }
+
+                    ec2.append("rect")
+                       .attr({ "class": "rect",
+                               // "width": width - 200 * item_num,
+                               "width": width - x * item_num,
+                               "height": text_size * (ec2_items.length + 1),
+                               "x": image_size * item_num,
+                               "y": image_size * item_num,
+                             });
+          }
+      }
+
+      d3.selectAll(".image").attr({ "opacity": 1,
+                                    "width"  : image_size,
+                                    "height" : image_size,
+                                  });
+      
+      d3.selectAll(".rect").attr({ "stroke": "black",
+                                   "stroke-width": 0.5,
+                                   "fill": "#000",
+                                   "fill-opacity": 0,
+                                   "rx": 10,
+                                   "ry": 10,
+                                 });
+
+    });
+  </script>
+</body>
+</html>
