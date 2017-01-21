@@ -8,7 +8,6 @@ Twitter: @k_kanou
 
 　[AWS Config](https://aws.amazon.com/jp/config/) は、セキュリティとガバナンスを可能にする構成変更の通知、構成履歴、AWS リソースのインベントリーをお客様へ提供する完全マネージド型のサービスです。AWSリソースの構成や設定変更の履歴を監査・可視化することが出来ます。
 
-> 参考）
 > AWS再入門 AWS Config編
 > http://dev.classmethod.jp/cloud/aws/cm-advent-calendar-2015-aws-re-entering-aws-config/
 
@@ -19,7 +18,6 @@ Twitter: @k_kanou
 
 　AWS Config Partnerに登録されている有料のサービスを活用することもできます。ただ、有料のサービスのため、個人では気軽に試しにくいと思います。そのため、今回はD3.jsで可視化を試みます。
 
-> 参考）
 > AWS Config Partners
 > https://aws.amazon.com/config/partners/
 
@@ -27,7 +25,6 @@ Twitter: @k_kanou
 
 　[D3.js](https://d3js.org/) は、JavaScriptの可視化ライブラリです。CSVやJSON形式のデータを読み込み、HTMLやSVG形式で可視化をすることができます。
 
-> 参考）
 > D3 gallery
 > https://github.com/d3/d3/wiki/Gallery
 
@@ -35,7 +32,6 @@ Twitter: @k_kanou
 
 　AWS Configのスナップショットのサンプルは以下から取得しました。
 
-> 参考）
 > Example Configuration Snapshot from AWS Config
 > http://docs.aws.amazon.com/ja_jp/config/latest/developerguide/example-s3-snapshot.html
 
@@ -43,7 +39,6 @@ Twitter: @k_kanou
 
 　AWSのアイコンは以下から取得しました。
 
-> 参考）
 > AWS Simple Icons for Architecture Diagrams
 > https://aws.amazon.com/jp/architecture/icons/
 
