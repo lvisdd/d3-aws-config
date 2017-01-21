@@ -11,7 +11,7 @@
 > AWS再入門 AWS Config編
 > http://dev.classmethod.jp/cloud/aws/cm-advent-calendar-2015-aws-re-entering-aws-config/
 
-> 「AWS Configを使ったAWS環境の見える化」
+> AWS Configを使ったAWS環境の見える化
 > http://www.slideshare.net/morisshi/develipersio-2016-e1-aws-configaws
 
 # AWS Config Partner について
