@@ -1,5 +1,7 @@
 # AWSのシステム構成をD3.jsで可視化する
-## ~『SIerは雲をつかめるか？』~
+<p align="right">
+  <img src="logo.png">
+</p>
 ---
 <div style="text-align: right;">加納　邦彦</div>
 
