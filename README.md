@@ -1,9 +1,11 @@
 # AWSのシステム構成をD3.jsで可視化する
-<p align="right">
+<p align="center">
   <img src="logo.png">
 </p>
 ---
-<div style="text-align: right;">加納　邦彦</div>
+<p align="right">
+加納　邦彦
+</p>
 
 ## はじめに
 
